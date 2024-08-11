@@ -80,7 +80,7 @@ export default function ContryItemDetails({ country }) {
                   <button
                     key={border}
                     id="border-buttons"
-                    onClick={() => navigate(`/${border}`)}
+                    onClick={() => navigate(`REST-Countries-API-App/${border}`)}
                   >
                     {border}
                   </button>

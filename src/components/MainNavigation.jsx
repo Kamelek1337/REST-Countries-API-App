@@ -35,7 +35,7 @@ export default function MainNavigation() {
 
   return (
     <header className="header" data-theme={theme}>
-      <Link href="/">Where in the world?</Link>
+      <Link href="/REST-Countries-API-App">Where in the world?</Link>
 
       <div className="theme-box">
         {themeState}

@@ -13,6 +13,7 @@ import { ThemeContext } from "../context/Theme.jsx";
 import { useContext } from "react";
 export default function CountryDetailsPage() {
   const { country } = useRouteLoaderData("country-details");
+
   const navigate = useNavigate();
 
   const { theme } = useContext(ThemeContext);
@@ -32,25 +33,26 @@ export default function CountryDetailsPage() {
 }
 
 async function loadEvent(id) {
-  const response = await fetch("https://restcountries.com/v3.1/alpha/" + id);
+  let url = "https://restcountries.com/v3.1/alpha/" + id;
+  const response = await fetch(url);
 
-  if (!response.ok) {
+  if (response.ok) {
+    const resData = await response.json();
+    return resData;
+  } else {
     throw json(
       { message: "Could not fetch details for selected event." },
       {
         status: 500,
       }
     );
-  } else {
-    const resData = await response.json();
-    return resData;
   }
 }
 
 export async function loader({ params }) {
   const id = params.countryId;
 
-  return defer({
+  return {
     country: await loadEvent(id),
-  });
+  };
 }
